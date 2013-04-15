@@ -1,0 +1,79 @@
+
+#menu dl {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    width: 200px;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+}
+
+#menu dl dt {
+    background-color: #666;
+}
+#menu dl  dd {
+    background-color: #666;
+	font-size: 9pt;
+}
+
+#menu dl dt a {
+    color: #ccc;
+    text-decoration: none; 
+    display: block;
+	text-transform: uppercase;
+    padding: 10px 10px 10px 20px;
+}
+#menu dl dd a {
+    color: #ccc;
+    text-decoration: none; 
+    display: block;
+    padding: 10px 10px 10px 10px;
+}
+#menu dl dt a:hover {
+    background: #000;
+    border-left: 10px solid #333;
+    color: #fff;
+}
+
+#menu dl dd a:hover {
+    background: #000;
+    border-left: 10px solid #333;
+    color: #fff;
+}
+
+#prof a {
+font-size: 16px;
+font-family: Verdana;
+color:#518DB0;
+font-weight:bolder;
+
+}
+#prof nom{
+font-size: 16px;
+font-family: Verdana;
+color:#67BA36;
+}
+
+#prof span{
+font-size: 16px;
+font-family: Verdana;
+}
+#prof  p{
+font-size: 16px;
+font-family: Verdana;
+color:#211FA1;
+}
+
+#prof amarillo{
+font-size: 16px;
+font-family: Verdana;
+color:#E4831B;
+font-weight:bolder;
+}
+
+#prof cab{
+font-size: 24px;
+font-family: Verdana;
+color:#3A2CB9	;
+font-weight:bolder;
+}
