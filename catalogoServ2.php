@@ -1,5 +1,6 @@
 <?php
-session_start(); 
+include 'conexion.php';
+ 
 echo '<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,24 +26,8 @@ echo '<html xmlns="http://www.w3.org/1999/xhtml">
 </div></td>
     <td>';
 	
-if($_SESSION[access] == true) 
+if ($conexion) 
 {		
-	// echo'
-	// <div id = "prof">
-	// <form id="form0" name="form0" method="post" action="buscador.php">
-	// <span>Buscar palabra: </span> <INPUT TYPE="text" NAME="busqueda" id = "busqueda" >
-	// <select name="sel">
-			// <option value="ServOfrece">Ofrece</option>
-		// <option value="ServBusca">Busca</option>	
-		// </select> 
-	// <input type="submit" name="e" value="Enviar"  />
-	// <br/>
-	// </form>';
-	
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if ($conexion)		
-		if(!mysql_select_db("u81329_bdt", $conexion))
-			die(mysql_error());
 	
 	echo"<div id = 'prof'><table><cab><br>SE BUSCA:</cab>";
 	$queEmp1 = "SELECT DISTINCT id_usuario FROM serv_usuario WHERE ofer_dem = '0'";
@@ -63,9 +48,8 @@ if($_SESSION[access] == true)
 	echo"</div></td></table>";		
 
 	
-	// $queEmp = "SELECT * FROM tipo_servicio";
-	// $resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-	
 	echo"</div></table>";
+} else {
+    echo $mensaje;
 }
 ?>
