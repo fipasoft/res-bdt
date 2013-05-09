@@ -1,3 +1,4 @@
+<?php include 'conexion.php'; ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,12 +7,8 @@
 
 <body>
 <?php
-	
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
 	if ($conexion)
-	{	
-		if(mysql_select_db("u81329_bdt", $conexion))
-		{	
+	{		
 			$clave = substr($_POST['txtCorreo'],0, strpos($_POST['txtCorreo'],"@"));
 			if($_POST["id"] == NULL)
 			{	
@@ -63,11 +60,9 @@ Equipo de la Red de Economía Solidaria (RES)";
 					die(mysql_error());
 				echo "Inversor editado exitosamente<br />";
             }
-            				
-		}	
-		else
-			die(mysql_error());
-	}
+	} else {
+	    echo $mensaje;
+    }
 	
 ?>
 </body>
