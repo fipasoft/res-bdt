@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'conexion.php';
 echo'<html>
 
 	<head><title>Perfil del Usuario</title></head>
@@ -24,17 +24,13 @@ echo'<html>
 	 </dl>
  
 </div></td><br/><td>';
-	if($_SESSION[access] == true) 
+	if($conexion) 
 	{
 		echo "<div id= 'prof'> <p> Bienvenido ".$_SESSION[user].
 			'<br/><a href = "cerrarSession.php">Cerrar sesión</a></p>';		
 	
 		$cadbusca="SELECT * FROM inversores WHERE Codigo_bdt = '". $_SESSION[user] ."'";
 		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-		if ($conexion)
-		{		
-			if(mysql_select_db("u81329_bdt", $conexion))
-			{
 				$resEmp = mysql_query($cadbusca, $conexion) or die(mysql_error());
 				$rowEmp = mysql_fetch_assoc($resEmp);
 				echo '<br/><br/><span>Nombre:</span> <nom>'. $rowEmp["Nombre"];
@@ -47,18 +43,7 @@ echo'<html>
 				$queEmp = 'SELECT id, Nombre FROM inversores WHERE id ="'. $rowEmp["asesor"] .'"';
 				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());	
 				$rowEmp = mysql_fetch_assoc($resEmp);
-				echo '</nom><br/><br/>Su asesor de la RES: <a href= "verProfile.php?id='.$rowEmp["id"].'">'.$rowEmp["Nombre"].'</a></br>';	
-				// echo 'su asesor es: '. $rowEmp["asesor"];
-
-				// $cadbusca="SELECT id, Nombre, Codigo_bdt FROM inversores WHERE Colonia = '". $rowEmp["Colonia"] ."'";
-					// $resEmp = mysql_query($cadbusca, $conexion) or die(mysql_error());
-					// if($resEmp)
-					// {
-						// echo "</td><td><span>Personas que viven en su colonia: <br/></span>";
-						// while($rowEmp = mysql_fetch_assoc($resEmp))
-							// if( $_SESSION[user] != $rowEmp["Codigo_bdt"])
-								// echo '- <a href= verProfile.php?id='. $rowEmp["id"].'>'.$rowEmp["Nombre"]. "</a><br/><br/>";
-					// }
+				echo '</nom><br/><br/>Su asesor de la RES: <a href= "verProfile.php?id='.$rowEmp["id"].'">'.$rowEmp["Nombre"].'</a></br>';
 				$queEmp = "SELECT * FROM inversores WHERE Codigo_bdt = '". $_SESSION[user] ."'";
 				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());	
 				$rowEmp = mysql_fetch_assoc($resEmp);
@@ -193,11 +178,8 @@ echo'<html>
 
 				}				
 				echo'</td></tr></table></p></body></html>';
-					
-			}
-		}
 	}
 	else
-		echo "No has iniciado sesion";
+		echo $mensaje;
 
 ?>
