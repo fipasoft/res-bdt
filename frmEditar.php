@@ -1,3 +1,4 @@
+<?php include 'conexion.php'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,24 +16,6 @@
 
 <body>
 
-<?php 
-	if($_GET != NULL)
-	{
-		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-		if ($conexion)
-		{		
-			if(mysql_select_db("u81329_bdt", $conexion))
-			{
-				$queEmp = "SELECT * FROM inversores WHERE id = '". $_GET["id"]. "'";
-				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-				$rowEmp = mysql_fetch_assoc($resEmp);
-			}
-		}
-
-	}
-	
-?>
-
 <table width="729" border="0">
   <tr>
     <td width="200">&nbsp;</td>
@@ -49,6 +32,17 @@
 		  <dt><a href="index.htm" title="Aplicación BdT 1.0 beta">Acerca de</a></dt>
 	 </dl>
 </div></td>
+
+<?php if ($conexion) { ?>
+
+<?
+if($_GET != NULL)
+{
+    $queEmp = "SELECT * FROM inversores WHERE id = '". $_GET["id"]. "'";
+    $resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
+    $rowEmp = mysql_fetch_assoc($resEmp);
+}
+?>
     <td><form id="form1" name="form1" method="post" action="editarInversor.php">
       <p>Datos del nuevo inversor:</p>
   <table width="534" border="1">
@@ -151,6 +145,14 @@
   </p>
 </form></td>
   </tr>
+  
+<?php 
+
+} else {
+    echo $mensaje;
+}
+
+?>
 </table>
 </body>
 </html>
