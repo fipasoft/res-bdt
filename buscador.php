@@ -1,3 +1,4 @@
+<?php include 'conexion.php'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,6 +22,9 @@
 	  <dt><a href="index.htm" title="Aplicación BdT 1.0 beta">Acerca de</a></dt>
 	 </dl>
 </div></td>
+
+<?php if ($conexion) { ?>
+
 <td>
     <div id = "prof">
 	<form id="form0" name="form0" method="post" action="buscador.php">
@@ -33,17 +37,12 @@
 	<input type="submit" name="e" value="Enviar"  />
 	<br/><br/>
 </form>
-<?php 
+<?php
 
  if ($_POST["busqueda"] != '')
 { 
 	
-	$cadbusca="SELECT id, Nombre, ServOfrece, ServBusca FROM inversores WHERE ". $_POST["sel"] ." LIKE '%".$_POST["busqueda"]."%' LIMIT 50";  	
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if ($conexion)
-	{		
-		if(mysql_select_db("u81329_bdt", $conexion))
-		{
+	$cadbusca="SELECT id, Nombre, ServOfrece, ServBusca FROM inversores WHERE ". $_POST["sel"] ." LIKE '%".$_POST["busqueda"]."%' LIMIT 50";
 			$resEmp = mysql_query($cadbusca, $conexion) or die(mysql_error());
 			$totEmp = mysql_num_rows($resEmp);
 			echo "Campos encontrados:".$totEmp."<br>";
@@ -71,12 +70,16 @@
 			}
 			else
 				echo "No hay palabras coincidentes";
-					
-		}
-	}
 }
 else
 	echo "No hay palabra para buscar";
+?>
+
+<?php
+
+} else {
+    echo $mensaje;
+}
 
 ?>
 </body>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+include 'conexion.php'; 
 echo'<html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="menu.css" rel="stylesheet" type="text/css">
@@ -24,9 +25,7 @@ echo'<html>
   <tr>
    
     <td> <div id = "prof">';
-		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-		if(mysql_select_db("u81329_bdt", $conexion))
-		{
+    if ($conexion) {
 			$queEmp = "SELECT inversores.id, inversores.Nombre, pagos.calif, pagos.comentario, pagos.id_pago FROM inversores, pagos WHERE inversores.id = id_receptor ORDER BY pagos.id_pago DESC";
 			$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
 			while($rowEmp = mysql_fetch_assoc($resEmp))
@@ -35,7 +34,10 @@ echo'<html>
 					echo "* <a href = 'verProfile.php?id=".$rowEmp["id"]."'>". $rowEmp["Nombre"]." </a>le comentaron:<p> ". $rowEmp["comentario"]."</p><hr align='center' width='85%'>";
 					$t++;
 				}
-		}
+	} else {
+	   echo $mensaje;
+	}
+	
 	echo'</div></td>
   </tr>
 </table>

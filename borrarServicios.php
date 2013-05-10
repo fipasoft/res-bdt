@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+include 'conexion.php'; 
 echo '<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,15 +25,11 @@ echo '<html xmlns="http://www.w3.org/1999/xhtml">
 	 </dl>
 </div></td>
     <td>
-<div id = "prof">';	
+<div id = "prof">';
+if ($conexion) {
+	
 if($_POST == NULL)
 {
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-			if ($conexion)
-			{		
-				if(!mysql_select_db("u81329_bdt", $conexion))
-					die(mysql_error());
-			}
 	$cadbusca="SELECT * FROM inversores WHERE Codigo_bdt = '". $_SESSION[user] ."'";
 	$resEmp = mysql_query($cadbusca, $conexion) or die(mysql_error());
 	$rowEmp = mysql_fetch_assoc($resEmp);
@@ -64,12 +60,6 @@ if($_POST == NULL)
 }
 else
 {
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-			if ($conexion)
-			{		
-				if(!mysql_select_db("u81329_bdt", $conexion))
-					die(mysql_error());
-			}
 	
 	foreach($_POST as $iter)
 	{
@@ -77,6 +67,10 @@ else
 		mysql_query($cadbusca, $conexion) or die(mysql_error());
 		echo "Servicio borrado con éxito <br/> <br/> <a href='borrarServicios.php'>Volver</a>";
 	}
+}
+
+} else {
+    echo $mensaje;
 }
 echo"</html>";
 ?>	

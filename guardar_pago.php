@@ -1,14 +1,9 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
-session_start();
+include 'conexion.php';
+if ($conexion) {
 	if(isset($_SESSION[access])) {
 		echo "Hola, ".$_SESSION[user];
 		
-		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-		if ($conexion)
-		{		
-			if(mysql_select_db("u81329_bdt", $conexion))
-			{
 				$cadbusca="SELECT * FROM inversores WHERE Codigo_bdt = '". $_SESSION[user] ."'";
 				$resEmp = mysql_query($cadbusca, $conexion) or die(mysql_error());
 				$rowEmp = mysql_fetch_assoc($resEmp);
@@ -55,9 +50,11 @@ session_start();
 									
 				
 			}
-		}
-	}
 	else
 		echo "No has iniciado sesion";
+		
+} else {
+    echo $mensaje;
+}
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+include 'conexion.php'; 
 echo '<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,16 +27,12 @@ echo '<html xmlns="http://www.w3.org/1999/xhtml">
     <td>
 <div id = "prof">';	
 
-if(isset($_SESSION[access]))
+if($conexion)
 { 
 	
 	if($_GET != NULL)
 	{
-		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-		if ($conexion)
-		{		
-			if(mysql_select_db("u81329_bdt", $conexion))
-			{
+		
 				$queEmp = "SELECT * FROM inversores WHERE id = '". $_GET["id"]. "'";
 				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
 				$rowEmp = mysql_fetch_assoc($resEmp);
@@ -96,12 +92,10 @@ if(isset($_SESSION[access]))
 					echo '<tr><td>'.$rowEmp1["tipo_serv"].'</td><td> '.$rowEmp["descrip"].'</td></tr>';
 				}	
 				echo'</table></td></tr></table>';
-			}
-		}
 	}
 }
 else
-	echo "No has iniciado sesión";
+	echo $mensaje;
 
 echo '</p></div>
 	</td></tr>

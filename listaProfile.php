@@ -1,5 +1,5 @@
 ﻿<?php 
-session_start(); 
+include 'conexion.php'; 
 	echo'<html><title>Busqueda de usuario</title>
 	<link href="menu.css" rel="stylesheet" type="text/css">	
 	<body>
@@ -10,7 +10,7 @@ session_start();
 	  </tr>
 	  <tr>
 		<td valign="top">
-		<div id="menu">
+		<div id="menu">Editar
 		 <dl>
 		  <dt><a href="index.htm" title="Inicio">Home</a></dt>
 		  <dt><a href="catalogoServ.php" title="Perfil">Catalogo de servicios</a></dt>	
@@ -19,6 +19,8 @@ session_start();
 		  <dt><a href="index.htm" title="Aplicación BdT 1.0 beta">Acerca de</a></dt>
 		 </dl>
 	</div></td>';
+
+if ($conexion) {
 
 if($_SESSION[access] == true) 
 {		
@@ -34,12 +36,6 @@ if($_SESSION[access] == true)
 		<input type="submit" name="e" value="Enviar"  />
 		<br/>
 		</form>';
-
-
-		
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if(mysql_select_db("u81329_bdt", $conexion))
-	{
 		
 		echo '<table border = "0" width = "850"> ';
 		// echo "<tr>";
@@ -119,11 +115,13 @@ if($_SESSION[access] == true)
 			
 			
 			echo "</table></table>";
-	}
 }
 else
 	echo "No has iniciado sesión";
 
+} else {
+    echo $mensaje;
+}
 
 	echo' </div>
 	</td>

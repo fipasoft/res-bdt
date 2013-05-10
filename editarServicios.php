@@ -1,3 +1,5 @@
+<?php include 'conexion.php'?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,6 +40,7 @@
 	  <dt><a href="index.htm" title="Aplicación BdT 1.0 beta">Acerca de</a></dt>
 	 </dl>
 </div></td>
+<?php if ($conexion) { ?>
     <td>
     <form action="agregarServicios.php" method="post" name="form1" id="form1">
       <p>
@@ -45,11 +48,6 @@
 	
 	if($_GET != NULL)
 	{
-		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-		if ($conexion)
-		{		
-			if(mysql_select_db("u81329_bdt", $conexion))
-			{
 				$queEmp = "SELECT * FROM inversores WHERE id = '". $_GET["id"]. "'";
 				echo '<input name="idOculto" id = "idOculto" type="hidden" value="'.$_GET["id"].'" />';
 				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
@@ -108,10 +106,9 @@
 					$i++;
 				}
 				
-			}
-		}
 	}
 ?>
+
 </p>
       <p>
         <label>
@@ -121,6 +118,12 @@
     </form>
 </td>
   </tr>
+
+<?php
+} else { 
+    echo $mensaje;
+}
+?>
 </table>
 </body>
 </html>
