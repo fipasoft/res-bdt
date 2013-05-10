@@ -30,7 +30,6 @@ echo'<html>
 			'<br/><a href = "cerrarSession.php">Cerrar sesión</a></p>';		
 	
 		$cadbusca="SELECT * FROM inversores WHERE Codigo_bdt = '". $_SESSION[user] ."'";
-		$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
 				$resEmp = mysql_query($cadbusca, $conexion) or die(mysql_error());
 				$rowEmp = mysql_fetch_assoc($resEmp);
 				echo '<br/><br/><span>Nombre:</span> <nom>'. $rowEmp["Nombre"];
