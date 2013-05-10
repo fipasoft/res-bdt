@@ -60,12 +60,6 @@ if($_POST == NULL)
 }
 else
 {
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-			if ($conexion)
-			{		
-				if(!mysql_select_db("u81329_bdt", $conexion))
-					die(mysql_error());
-			}
 	
 	foreach($_POST as $iter)
 	{

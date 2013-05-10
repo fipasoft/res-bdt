@@ -36,12 +36,6 @@ if($_SESSION[access] == true)
 		<input type="submit" name="e" value="Enviar"  />
 		<br/>
 		</form>';
-
-
-		
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if(mysql_select_db("u81329_bdt", $conexion))
-	{
 		
 		echo '<table border = "0" width = "850"> ';
 		// echo "<tr>";
@@ -121,7 +115,6 @@ if($_SESSION[access] == true)
 			
 			
 			echo "</table></table>";
-	}
 }
 else
 	echo "No has iniciado sesión";

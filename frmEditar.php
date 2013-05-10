@@ -123,13 +123,8 @@ if($_GET != NULL)
 	
 		<td>Ciudad: 
         <?
-			$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-			if ($conexion)	
-				if(mysql_select_db("u81329_bdt", $conexion))
-				{
 					$queEmp = "SELECT * FROM municipios WHERE estado = '1' ORDER BY nombre_municipio ASC";
 					$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-				}
 			echo '<select name="txtCiudad" id="txtCiudad">';
 			while($rowEmp = mysql_fetch_assoc($resEmp))
 				echo'<option>'. $rowEmp["nombre_municipio"]. '</option>';
