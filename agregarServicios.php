@@ -1,3 +1,4 @@
+<?php include 'conexion.php' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,15 +26,8 @@
 </div></td>
     <td>
 <?php  
+    if ($conexion) {
 	echo '<input name="idOculto" id = "idOculto" type="hidden" value="'.$_POST["idOculto"].'" />';
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if ($conexion)
-	{		
-		mysql_select_db("u81329_bdt", $conexion);
-		$queEmp = "SELECT * FROM servicios ORDER BY ofrece ASC";
-	}
-	else
-			die(mysql_error());
 
   echo '<table width="374" height="86" >
     <tr>
@@ -116,6 +110,9 @@
   </table>
  </td>
  </tr>
+<?php } else { ?>
+    <?php echo $mensaje; ?>
+<?php }?>
 </table>
 
 </form>

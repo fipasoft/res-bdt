@@ -26,12 +26,10 @@ echo '<html xmlns="http://www.w3.org/1999/xhtml">
     <td>
     <div id = "prof">';
 	
-session_start(); 
+include 'conexion.php';
 if($_SESSION[user] == "admin")
 {
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if(mysql_select_db("u81329_bdt", $conexion))
-	{
+	if ($conexion) {
 		
 		$queEmp = "SELECT id,Nombre FROM inversores ORDER BY Nombre ASC";
 		$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
@@ -46,6 +44,8 @@ if($_SESSION[user] == "admin")
 				echo "</tr>";
 			}
 			echo "</table>";
+	} else {
+	    echo $mensaje;
 	}
 }
 else

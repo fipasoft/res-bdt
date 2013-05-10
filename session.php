@@ -1,14 +1,9 @@
 <?php 
-	session_start();
-	if(!isset($_SESSION[access]))
+	include 'conexion.php';
+	if($conexion)
 	{
 		if($_POST != NULL && $_POST["user"] != "")
 		{
-			$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-			if ($conexion)
-			{		
-				if(mysql_select_db("u81329_bdt", $conexion))
-				{
 					$queEmp = "SELECT * FROM inversores WHERE Codigo_bdt = '". $_POST["user"]. "'";
 					$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
 					$rowEmp = mysql_fetch_assoc($resEmp);
@@ -17,10 +12,6 @@
 					{
 						$_SESSION[access] = true;
 						$_SESSION[user] = $_POST["user"];
-						// echo "INICIO CORRECTO, PARA CONTINUAR PRESIONA EL BOTÓN ";
-						// echo '<form id="form1" name="form1" method="post" action="usuario_perfil.php">'.
-							  // '<input type="submit" name="cmdEnviar" id="cmdEnviar" value="Continuar" />'.
-							 // '</form>';
 							?>
 							<script>
 								window.location.href = "usuario_perfil.php";
@@ -43,13 +34,9 @@
 						$_SESSION[access] = false;
 						session_destroy();
 					}
-				}
-			}
 
 		}
 	}
-	else
-		echo "Ud. ya inició sesión, no es necesario que vuelva a iniciar";
 echo'
 <link href="menu.css" rel="stylesheet" type="text/css">
 <body><table width="729" border="0">

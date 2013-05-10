@@ -1,9 +1,7 @@
 <?php
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if ($conexion)		
-		if(!mysql_select_db("u81329_bdt", $conexion))
-			die(mysql_error());
-			
+include 'conexion.php';
+	
+if ($conexion) {
 	$queEmp = "SELECT * FROM tipo_servicio";
 	$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
 	
@@ -47,4 +45,8 @@
 	while($rowEmp = mysql_fetch_assoc($resEmp))
 		mail($rowEmp["Correo"],$asunto,$mensaje,$headers);
 		//mail("cool_aguilar@hotmail.com",$asunto,$mensaje,$headers);
+		
+} else {
+    echo $mensaje;
+}
 ?>

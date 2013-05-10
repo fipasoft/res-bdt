@@ -1,9 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php 
-
-	$conexion = mysql_connect("localhost", "u81329_bdt", "aB1234");
-	if(mysql_select_db("u81329_bdt", $conexion))
-	{	
+include 'conexion.php';
+if ($conexion) {	
 		$queEmp = "SELECT Nombre, ServBusca, ServOfrece FROM inversores ORDER BY Nombre ASC";
 		$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
 		$totEmp = mysql_num_rows($resEmp);
@@ -29,6 +27,9 @@
 					$i++;
 			}
 			echo "</table>";
-	}
+
+} else {
+    echo $mensaje;
+}
 
 ?>
